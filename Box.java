@@ -1,27 +1,27 @@
-class Box1 {
-
-     double width;
-    double height;
-     double depth;
-    Box1(double width, double height, double depth) {
-        this.width = width;
-        this.height = height;
-        this.depth = depth;
-    }
-
-     double getVolume() {
-        return width * height * depth;
-    }
-
+class Box
+{
+void test()
+{ System.out.println("No parameters");
 }
-
-public class Box {
-
-    public static void main(String[] args) {
-        Box1 b = new Box1(10, 5, 2);
-
-        // Print the volume of the box
-        System.out.println("The volume of the box is: " + b.getVolume());
-    }
-
+void test(int a)
+{ System.out.println("a: " + a);
+}
+void test(int a, int b)
+{ System.out.println("a and b: " + a + " " + b);
+}
+double test(double a)
+{ System.out.println("double a: " + a);
+return a*a;
+}}
+class Box1
+{ public static void main(String args[])
+{
+Box ob = new Box();
+double result;
+ob.test();
+ob.test(10);
+ob.test(10, 20);
+result = ob.test(123.25);
+System.out.println("Result of ob.test(123.25): " + result);
+}
 }

@@ -1,76 +1,54 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#define max 50
 
-struct stack{
-    int arr[max][20];
+#define MAX 50
+
+struct Stack
+{
+    char arr[MAX][MAX];
     int top;
-}s;
-char pre[max];
+} s;
 
-void push(char c[]){
-    if(s.top==max-1){
-       printf("Overflow") ;
-       return;
-    }
-    strcpy(s.arr[++s.top],c);
+void push(char *str)
+{
+    strcpy(s.arr[++s.top], str);
 }
 
-char* pop(){
-    if(s.top==-1){
-        printf("Underflow");
-        return "#";
-    }
+char *pop()
+{
     return s.arr[s.top--];
 }
 
-void reverse(char c[]){
-    char temp;
-    int i,len=strlen(c);
-    for(i=0;i<len/2;i++){
-        temp=c[i];
-        c[i]=c[len-1-i];
-        c[len-1-i]=temp;
-    }
-}
-
-void Convert(){
+void main()
+{
     int i;
-    char op1[20],op2[20],temp[2],res[20];
-    for(i=0;pre[i]!='\0';i++){
-        temp[0]=pre[i];
-        temp[1]='\0';
-        switch(pre[i]){
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-                strcpy(op1,pop());
-                strcpy(op2,pop());
-                strcpy(res,"(");
-                strcat(res,op1);
-                strcat(res,temp);
-                strcat(res,op2);
-                strcat(res,")");
-                push(res);
-                break;
-            default:
-                push(temp);
+    s.top = -1;
+    char prefix[MAX], infix[MAX];
+    char op1[20], op2[20], ch[2];
+    printf("Enter prefix expression:\n");
+    gets(prefix);
+
+    for (i = strlen(prefix) - 1; i >= 0; i--)
+    {
+        ch[0] = prefix[i];
+        ch[1] = '\0';
+        if (ch[0] == '+' || ch[0] == '-' || ch[0] == '*' || ch[0] == '/')
+        {
+            strcpy(op1, pop());
+            strcpy(op2, pop());
+            strcpy(infix, "(");
+            strcat(infix, op1);
+            strcat(infix, ch);
+            strcat(infix, op2);
+            strcat(infix, ")");
+            push(infix);
+        }
+        else
+        {
+            push(ch);
         }
     }
-    if(s.top!=0)
-        printf("Invalid expression");
-    else
-        printf("Infix expression: %s",pop());
+    printf("Fully parenthesized infix expression:\n");
+    printf("%s\n", pop());
 }
 
-int main()
-{
-    s.top=-1;
-    printf("Enter Prefix expression: ");
-    scanf("%s",&pre);
-    reverse(pre);
-    Convert();
-    return 0;
-}

@@ -1,0 +1,171 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0x10001000  ; stack pointer val
+                                                            ue when stack is em
+                                                            pty
+    5 00000004 00000000        DCD              Reset_Handler ; reset vector 
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 F04F 0305       MOV              R3,#N
+   12 00000004 4805            LDR              R0, =SRC+4*(N-1)
+   13 00000006 4A06            LDR              R2, =SRC+4*(N-1+Shifts)
+   14 00000008         BACK
+   15 00000008 F850 1904       LDR              R1, [R0],#-4
+   16 0000000C F842 1904       STR              R1, [R2],#-4
+   17 00000010 F1A3 0301       SUB              R3,#1
+   18 00000014 2B00            CMP              R3,#0
+   19 00000016 D1F7            BNE              BACK
+   20 00000018 E7FE    STOP    B                STOP
+   21 0000001A 00000005 
+                       N       EQU              5
+   22 0000001A 00000002 
+                       Shifts  EQU              2
+   23 0000001A 00 00 00000010 
+              00000018         AREA             MYDATA, DATA, READWRITE
+   24 00000000 00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 SRC     DCD              0,0,0,0,0,0,0,0,0,0
+   25 00000028         END
+   26 00000028         
+                       
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=copy1.d 
+-ocopy1.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\
+NXP\LPC17xx --predefine="__EVAL SETA 1" --list=copy1.lst copy1.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file copy1.asm
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file copy1.asm
+   Uses
+      At line 2 in file copy1.asm
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+BACK 00000008
+
+Symbol: BACK
+   Definitions
+      At line 14 in file copy1.asm
+   Uses
+      At line 19 in file copy1.asm
+Comment: BACK used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file copy1.asm
+   Uses
+      At line 5 in file copy1.asm
+      At line 9 in file copy1.asm
+
+STOP 00000018
+
+Symbol: STOP
+   Definitions
+      At line 20 in file copy1.asm
+   Uses
+      At line 20 in file copy1.asm
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 7 in file copy1.asm
+   Uses
+      None
+Comment: mycode unused
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+END 00000028
+
+Symbol: END
+   Definitions
+      At line 25 in file copy1.asm
+   Uses
+      None
+Comment: END unused
+MYDATA 00000000
+
+Symbol: MYDATA
+   Definitions
+      At line 23 in file copy1.asm
+   Uses
+      None
+Comment: MYDATA unused
+SRC 00000000
+
+Symbol: SRC
+   Definitions
+      At line 24 in file copy1.asm
+   Uses
+      At line 12 in file copy1.asm
+      At line 13 in file copy1.asm
+
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+N 00000005
+
+Symbol: N
+   Definitions
+      At line 21 in file copy1.asm
+   Uses
+      At line 11 in file copy1.asm
+      At line 12 in file copy1.asm
+      At line 13 in file copy1.asm
+
+Shifts 00000002
+
+Symbol: Shifts
+   Definitions
+      At line 22 in file copy1.asm
+   Uses
+      At line 13 in file copy1.asm
+Comment: Shifts used once
+2 symbols
+344 symbols in table
