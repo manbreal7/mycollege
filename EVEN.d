@@ -1,0 +1,1 @@
+.\EVEN.o: D:\EVEN.ASM

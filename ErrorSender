@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+// Function to calculate and set parity bit
+int setParityBit(int data) {
+    int count = 0;
+    int temp = data;
+    
+    // Count the number of set bits in data
+    while (temp) {
+        count += temp & 1;
+        temp >>= 1;
+    }
+
+    // Set parity bit based on even or odd count
+    return (count % 2 == 0) ? (data | (1 << 7)) : data;
+}
+
+int main() {
+    int data;
+    
+    // Input data from the user
+    printf("Enter data to transmit (8-bit binary): ");
+    scanf("%d", &data);
+
+    // Check if input data is within 8-bit range
+    if (data < 0 || data > 255) {
+        printf("Invalid input. Please enter an 8-bit binary value.\n");
+        return 1;
+    }
+
+    // Set parity bit
+    int transmittedData = setParityBit(data);
+
+    // Print transmitted data
+    printf("Transmitted data (with parity bit): %d\n", transmittedData);
+
+    return 0;
+}

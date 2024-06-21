@@ -1,0 +1,198 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0x10001000  ; stack pointer val
+                                                            ue when stack is em
+                                                            pty
+    5 00000004 00000000        DCD              Reset_Handler ; reset vector 
+    6 00000008                 ALIGN
+    7 00000008                 AREA             mycode, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         
+   11 00000000         Reset_Handler
+   12 00000000 F04F 0800       MOV              R8, #0      ; Initialize even c
+                                                            ount to 0
+   13 00000004 F04F 0900       MOV              R9, #0      ; Initialize odd co
+                                                            unt to 0
+   14 00000008 4810            LDR              R0, =SRC    ; Load base address
+                                                             of array into R0
+   15 0000000A 4911            LDR              R1, =SRC_END ; Load end address
+                                                             of array into R1
+   16 0000000C         
+   17 0000000C         LOOP
+   18 0000000C F850 2B04       LDR              R2, [R0], #4 ; Load value from 
+                                                            array into R2 and i
+                                                            ncrement pointer
+   19 00000010 0852            LSRS             R2, R2, #1  ; Check if value is
+                                                             even or odd
+   20 00000012 D302            BCC              EVEN        ; Branch if even
+   21 00000014 F109 0901       ADD              R9, R9, #1  ; Increment odd cou
+                                                            nt
+   22 00000018 E001            B                NEXT        ; Branch to next it
+                                                            eration
+   23 0000001A         EVEN
+   24 0000001A F108 0801       ADD              R8, R8, #1  ; Increment even co
+                                                            unt
+   25 0000001E         NEXT
+   26 0000001E 4288            CMP              R0, R1      ; Compare current a
+                                                            ddress with end add
+                                                            ress
+   27 00000020 D1F4            BNE              LOOP        ; If not end of arr
+                                                            ay, continue loop
+   28 00000022         
+   29 00000022         ; Here, R8 contains the count of even elements
+   30 00000022         ; and R9 contains the count of odd elements
+   31 00000022         
+   32 00000022 E7FE    STOP    B                STOP
+   33 00000024                 ALIGN
+   34 00000024 00000001 
+              00000002 
+              00000003 
+              00000004 
+              00000005 
+              00000006 
+              00000007 
+              00000008 
+              00000009 
+              0000000A SRC     DCD              1, 2, 3, 4, 5, 6, 7, 8, 9, 10 
+                                                            ; Sample array
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   35 0000004C         END
+   36 0000004C 0000000A 
+                       SRC_END EQU              10
+   37 0000004C         
+   38 0000004C                 END
+              00000000 
+              0000000A 
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=EVENODD.
+d -oEVENODD.o -ID:\Keil\ARM\RV31\INC -ID:\Keil\ARM\CMSIS\Include -ID:\Keil\ARM\
+Inc\NXP\LPC17xx --predefine="__EVAL SETA 1" --list=EVENODD.lst EVENODD.ASM
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file EVENODD.ASM
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file EVENODD.ASM
+   Uses
+      At line 2 in file EVENODD.ASM
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+END 0000004C
+
+Symbol: END
+   Definitions
+      At line 35 in file EVENODD.ASM
+   Uses
+      None
+Comment: END unused
+EVEN 0000001A
+
+Symbol: EVEN
+   Definitions
+      At line 23 in file EVENODD.ASM
+   Uses
+      At line 20 in file EVENODD.ASM
+Comment: EVEN used once
+LOOP 0000000C
+
+Symbol: LOOP
+   Definitions
+      At line 17 in file EVENODD.ASM
+   Uses
+      At line 27 in file EVENODD.ASM
+Comment: LOOP used once
+NEXT 0000001E
+
+Symbol: NEXT
+   Definitions
+      At line 25 in file EVENODD.ASM
+   Uses
+      At line 22 in file EVENODD.ASM
+Comment: NEXT used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 11 in file EVENODD.ASM
+   Uses
+      At line 5 in file EVENODD.ASM
+      At line 9 in file EVENODD.ASM
+
+SRC 00000024
+
+Symbol: SRC
+   Definitions
+      At line 34 in file EVENODD.ASM
+   Uses
+      At line 14 in file EVENODD.ASM
+Comment: SRC used once
+STOP 00000022
+
+Symbol: STOP
+   Definitions
+      At line 32 in file EVENODD.ASM
+   Uses
+      At line 32 in file EVENODD.ASM
+Comment: STOP used once
+mycode 00000000
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: mycode
+   Definitions
+      At line 7 in file EVENODD.ASM
+   Uses
+      None
+Comment: mycode unused
+8 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+SRC_END 0000000A
+
+Symbol: SRC_END
+   Definitions
+      At line 36 in file EVENODD.ASM
+   Uses
+      At line 15 in file EVENODD.ASM
+Comment: SRC_END used once
+1 symbol
+344 symbols in table
